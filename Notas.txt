@@ -1,0 +1,9 @@
+************************************************
+    Control de Versiones
+************************************************
+
+Fasat-Forward Merge: Git no neceista crear un commit de merge. Simplemente mueve el puntero de la rama hacia adelante
+
+3-Way Merge: Ocurre cuando as dos ramas avanzaron por seaparado y se necesita crear un punto en donde se encuentren ambas. 
+
+-Un commit de merge tiene dos padres. 
