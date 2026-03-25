@@ -7,3 +7,10 @@ Fasat-Forward Merge: Git no neceista crear un commit de merge. Simplemente mueve
 3-Way Merge: Ocurre cuando as dos ramas avanzaron por seaparado y se necesita crear un punto en donde se encuentren ambas. 
 
 -Un commit de merge tiene dos padres. 
+
+/*
+
+       grid-template-columns: minmax(20px , 1fr) repeat(2,2fr);
+
+        hay tres columnas, la primera es con el minmax y las otras dos con el repeat
+*/
