@@ -14,3 +14,15 @@ Fasat-Forward Merge: Git no neceista crear un commit de merge. Simplemente mueve
 
         hay tres columnas, la primera es con el minmax y las otras dos con el repeat
 */
+
+
+/*
+
+    Controller: se comunica con el FACADE y el cliente.  webapi
+
+    Domain: donde estan las clases relacionadas con la base de datos
+
+    DomainService: maneja los servicios y DTOs (Data Tranfer Object)
+
+    Los DTO no tiene todos los atributos del  Objeto por razones de seguridad.
+*/
