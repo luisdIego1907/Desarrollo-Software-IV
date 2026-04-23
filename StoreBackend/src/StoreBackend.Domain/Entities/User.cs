@@ -12,7 +12,8 @@ public class User
     public int Id {get; private set;}
 
     [Required]
-    public int ExternalId {get; set;}
+    [StringLength(50)]
+    public string ExternalId {get; set;}
 
     [Required]
     [StringLength(50)]
