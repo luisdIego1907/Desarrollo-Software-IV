@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Práctica guiada: Flexbox y Media Queries</title>
+
+  <link rel="styles" href="/PracticaExamen/styles/style.css">
+  <style>
+    /* =========================================================
+      PRÁCTICA GUIADA DE FLEXBOX
+      ---------------------------------------------------------
+      INSTRUCCIONES:
+      1. Abre este archivo en el navegador.
+      2. Lee cada PASO dentro del CSS.
+      3. Descomenta o modifica las propiedades indicadas.
+      4. Guarda el archivo y refresca el navegador.
+      5. Cambia el tamaño de la ventana para probar las media queries.
+    ========================================================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7fb;
+      color: #1f2937;
+      line-height: 1.5;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* =========================================================
+      PASO 1: HEADER CON FLEXBOX
+      ---------------------------------------------------------
+      Objetivo: acomodar el logo y el menú en una sola fila.
+
+      Prueba cambiar:
+      - justify-content: space-between, center, flex-start, flex-end
+      - align-items: center, flex-start, flex-end
+      - gap: 16px, 24px, 32px
+    ========================================================= */
+
+    .header {
+      background: #0f172a;
+      color: white;
+      padding: 18px 32px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    .nav a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    /* =========================================================
+      PASO 2: HERO CON DOS COLUMNAS
+      ---------------------------------------------------------
+      Objetivo: colocar texto a la izquierda e imagen/tarjeta a la derecha.
+
+      Conceptos:
+      - flex-direction: row coloca elementos horizontalmente.
+      - flex-wrap: wrap permite que bajen de línea si no caben.
+      - flex: 1 1 300px permite crecer, encogerse y tener base inicial.
+    ========================================================= */
+
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 32px;
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .hero__content {
+      flex: 1 1 360px;
+    }
+
+    .hero__content h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: #0f172a;
+    }
+
+    .hero__content p {
+      max-width: 560px;
+      font-size: 1.1rem;
+      color: #475569;
+      margin-bottom: 24px;
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn--primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn--secondary {
+      background: white;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+    }
+
+    .hero__card {
+      flex: 1 1 300px;
+      min-height: 260px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.12);
+      padding: 24px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: #f8fafc;
+      border-radius: 16px;
+    }
+
+    .stat-row strong {
+      color: #0f172a;
+    }
+
+    .stat-row span {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    /* =========================================================
+      PASO 3: TARJETAS CON FLEX-WRAP
+      ---------------------------------------------------------
+      Objetivo: hacer una sección de tarjetas que se acomoden solas.
+
+      Prueba:
+      - Quita flex-wrap y observa el problema.
+      - Cambia justify-content a center o space-between.
+      - Cambia gap de 20px a 8px o 40px.
+    ========================================================= */
+
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    .section__title {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+
+    .section__description {
+      color: #64748b;
+      margin-bottom: 24px;
+      max-width: 700px;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e2e8f0;
+
+      flex: 1 1 240px;
+      max-width: 330px;
+
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+
+    .card h3 {
+      color: #0f172a;
+    }
+
+    .card p {
+      color: #64748b;
+      flex-grow: 1;
+    }
+
+    .card a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+      PASO 4: PROPIEDADES DE HIJOS
+      ---------------------------------------------------------
+      Objetivo: practicar order, flex-grow, flex-shrink, flex-basis
+      y align-self.
+
+      Actividades:
+      1. Cambia order en .panel--important.
+      2. Cambia flex-grow de .panel--wide.
+      3. Cambia align-self de .panel--small.
+    ========================================================= */
+
+    .practice-area {
+      min-height: 360px;
+      background: #e0f2fe;
+      border: 2px dashed #38bdf8;
+      border-radius: 22px;
+      padding: 20px;
+
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      align-content: center;
+      gap: 16px;
+    }
+
+    .panel {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid #bae6fd;
+      min-height: 120px;
+
+      flex: 1 1 180px;
+    }
+
+    .panel--important {
+      order: 0;
+      background: #fef3c7;
+      border-color: #f59e0b;
+    }
+
+    .panel--wide {
+      flex-grow: 2;
+    }
+
+    .panel--small {
+      flex: 0 1 160px;
+      align-self: center;
+    }
+
+    /* =========================================================
+      PASO 5: MEDIA QUERIES
+      ---------------------------------------------------------
+      Objetivo: adaptar el diseño a tablet y celular.
+
+      Regla clave:
+      - Flexbox acomoda los elementos.
+      - Media queries cambian las reglas según el ancho de pantalla.
+    ========================================================= */
+
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding: 40px 24px;
+      }
+
+      .hero__actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .section {
+        padding: 28px 24px;
+      }
+
+      .card {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 16px 20px;
+      }
+
+      .nav {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .hero {
+        padding: 32px 20px;
+      }
+
+      .hero__card {
+        padding: 18px;
+      }
+
+      .stat-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section {
+        padding: 24px 20px;
+      }
+
+      .practice-area {
+        min-height: auto;
+        align-content: stretch;
+      }
+
+      .panel,
+      .panel--small {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="logo">FlexPractice</div>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#practica">Práctica</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div class="hero__content">
+          <h1>Aprende a acomodar elementos con Flexbox</h1>
+          <p>
+            Esta página contiene varios elementos pensados para practicar contenedores flex,
+            alineación, distribución, separación, crecimiento de hijos y adaptación responsive.
+          </p>
+
+          <div class="hero__actions">
+            <button class="btn btn--primary">Empezar práctica</button>
+            <button class="btn btn--secondary">Ver instrucciones</button>
+          </div>
+        </div>
+
+        <aside class="hero__card" aria-label="Resumen de práctica">
+          <div class="stat-row">
+            <strong>display: flex</strong>
+            <span>Activa el contenedor</span>
+          </div>
+          <div class="stat-row">
+            <strong>justify-content</strong>
+            <span>Eje principal</span>
+          </div>
+          <div class="stat-row">
+            <strong>align-items</strong>
+            <span>Eje cruzado</span>
+          </div>
+        </aside>
+      </section>
+
+      <section id="servicios" class="section">
+        <h2 class="section__title">Tarjetas responsive</h2>
+        <p class="section__description">
+          Estas tarjetas usan flex-wrap, gap y flex para cambiar de cantidad por fila según el espacio disponible.
+        </p>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card__icon">1</div>
+            <h3>Contenedor padre</h3>
+            <p>El padre define cómo se acomodan los hijos usando propiedades como dirección, alineación y separación.</p>
+            <a href="#practica">Practicar</a>
+          </article>
+
+          <article class="card">
+            <div class="card__icon">2</div>
+            <h3>Elementos hijos</h3>
+            <p>Los hijos pueden crecer, encogerse, cambiar su tamaño inicial o alterar su orden visual.</p>
+            <a href="#practica">Practicar</a>
+          </article>
+
+          <article class="card">
+            <div class="card__icon">3</div>
+            <h3>Media queries</h3>
+            <p>Las media queries permiten cambiar el diseño cuando el ancho de pantalla se reduce.</p>
+            <a href="#practica">Practicar</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="practica" class="section">
+        <h2 class="section__title">Zona de práctica</h2>
+        <p class="section__description">
+          Modifica las clases .practice-area, .panel, .panel--important, .panel--wide y .panel--small para observar el comportamiento de Flexbox.
+        </p>
+
+        <div class="practice-area">
+          <div class="panel panel--important">
+            <h3>Panel importante</h3>
+            <p>Prueba cambiar mi propiedad order.</p>
+          </div>
+
+          <div class="panel panel--wide">
+            <h3>Panel ancho</h3>
+            <p>Prueba cambiar mi flex-grow.</p>
+          </div>
+
+          <div class="panel panel--small">
+            <h3>Panel pequeño</h3>
+            <p>Prueba cambiar mi align-self.</p>
+          </div>
+
+          <div class="panel">
+            <h3>Panel normal</h3>
+            <p>Este panel usa la configuración base.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto" class="section">
+        <h2 class="section__title">Reto final</h2>
+        <p class="section__description">
+          Cambia el diseño para que en escritorio haya varias columnas, en tablet haya dos columnas y en celular todo quede en una sola columna.
+        </p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
